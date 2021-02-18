@@ -10,6 +10,12 @@ variable "vpc_id"{
     default = "vpc-0b9b5a3f39b1c09c5"
 }
 
+variable "aws_access_key"{
+      default = "aws_key"
+  }
+variable "aws_secret_key"{
+      default = "aws_key"
+  }
 variable "region"{
     default="ap-south-1"
 }
