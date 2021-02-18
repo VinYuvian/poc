@@ -11,10 +11,10 @@ pipeline {
       steps {
         dir("terraform") {
              sh "pwd"
-          withAWS(credentialsId:'aws_key',region:'ap-south-1') {
-                 // do something
-                  sh "terraform init -input=false"
-              }
+          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
+              // some block
+              sh "terraform init -input=false"
+          }
         }
           // sh "${env.TERRAFORM_HOME}/terraform init -input=false"
       }
