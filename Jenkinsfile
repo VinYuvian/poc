@@ -15,7 +15,10 @@ pipeline {
   stages {
     stage('Terraform Init') {
       steps {
-        sh "${env.TERRAFORM_HOME}/terraform init -input=false"
+        dir("terraform") {
+             sh "pwd"
+        }
+          // sh "${env.TERRAFORM_HOME}/terraform init -input=false"
       }
     }
     stage('Terraform Plan') {
