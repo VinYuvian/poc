@@ -1,0 +1,9 @@
+---
+- name: common tasks
+  import_playbook: infra.yaml
+
+- name: master tasks
+  import_playbook: master.yaml
+
+- name: worker tasks
+  import_playbook: join.yaml
