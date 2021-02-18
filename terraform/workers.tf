@@ -12,7 +12,7 @@ resource "aws_instance" "worker" {
 
     #availability_zone = "${var.region}${var.az[count.index]}"
     vpc_security_group_ids = [aws_security_group.kubernetes-securitygroup.id]
-    key_name = aws_key_pair.kubernetes_key.key_name
+    key_name = "kubernetes-poc"
     provisioner "local-exec"{
 			command="/bin/bash inventory.sh '[workers]' 'worker${count.index} ansible_host=${self.public_ip}'"
 	  }
