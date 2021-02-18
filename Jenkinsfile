@@ -13,7 +13,7 @@ pipeline {
              sh "pwd"
           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
-              sh "terraform init -input=false"
+              sh 'terraform init --backend-config="access_key=$access_key" --backend-config="secret_key=$secret_key"'
           }
         }
           // sh "${env.TERRAFORM_HOME}/terraform init -input=false"
