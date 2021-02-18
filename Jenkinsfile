@@ -11,7 +11,7 @@ pipeline {
       steps {
         dir("terraform") {
              sh "pwd"
-          withAWS(credentialsId:'aws_key',region:'eu-west-1') {
+          withAWS(credentialsId:'aws_key',region:'ap-south-1') {
                  // do something
                   sh "terraform init -input=false"
               }
