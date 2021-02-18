@@ -22,7 +22,11 @@ pipeline {
     stage('Terraform Plan') {
       steps {
         dir("terraform") {
-          sh "terraform plan -out=tfplan -input=false"
+           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
+              // some block
+              sh "terraform plan -out=tfplan -input=false"
+              //sh 'terraform init --backend-config="access_key=$access_key" --backend-config="secret_key=$secret_key"'
+          }
         }
       }
     }
