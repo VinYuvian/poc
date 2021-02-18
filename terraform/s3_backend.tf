@@ -7,6 +7,6 @@ terraform {
     # Replace this with your DynamoDB table name!
     dynamodb_table = "s3-backend-lock"
     encrypt        = true
-    profile = "kubernetes"
+    #profile = "kubernetes"
   }
 }
