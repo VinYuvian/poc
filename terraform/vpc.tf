@@ -1,7 +1,7 @@
 # PROVIDER 
 
 provider "aws"{
-    profile = "kubernetes"
+    #profile = "kubernetes"
     region = "ap-south-1"
 }
 
