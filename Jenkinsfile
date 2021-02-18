@@ -25,7 +25,7 @@ pipeline {
            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
               //sh "terraform plan -out=tfplan -input=false"
-              sh 'terraform plan -var="access_key=$access_key" -var="secret_key=$secret_key"'
+              sh 'terraform plan -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
         }
       }
