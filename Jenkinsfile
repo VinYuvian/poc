@@ -34,7 +34,11 @@ pipeline {
       steps {
          dir("terraform") {
           input 'Apply Plan'
-          sh "terraform apply -input=false tfplan"
+           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
+              // some block
+              //sh "terraform plan -out=tfplan -input=false"
+              sh 'terraform apply -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+          }
         }
       }
     }
