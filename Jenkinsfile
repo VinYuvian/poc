@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+        terraform 'Terraform 0.14.6'
+    }
   parameters {
     password (name: 'AWS_ACCESS_KEY_ID')
     password (name: 'AWS_SECRET_ACCESS_KEY')
