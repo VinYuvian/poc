@@ -46,10 +46,9 @@ pipeline {
     stage('Ansible playbook'){
       steps {
          dir("ansible") {
-           env.WORKSPACE = pwd()
            ansiblePlaybook(
              credentialsId: 'ansible', 
-             inventory: '${env.WORKSPACE}/terraform/inventory', 
+             inventory: '${WORKSPACE}/terraform/inventory', 
              playbook: 'main.yaml'
            )
               //sh "terraform plan -out=tfplan -input=false"
