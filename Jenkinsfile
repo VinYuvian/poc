@@ -2,7 +2,6 @@ pipeline {
   agent any
   tools {
         terraform 'terraform'
-        ansible 'ansible'
     }
   environment {
     TERRAFORM_HOME = "terraform"
