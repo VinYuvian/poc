@@ -40,7 +40,7 @@ pipeline {
               //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
              script{
                 env.data = readFile(file: 'inventory_temp')
-               writeFile(file: 'inventory', text: ${data})  
+               writeFile(file: 'inventory', text: env.data)  
              }
              sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
