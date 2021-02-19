@@ -34,6 +34,8 @@ pipeline {
       steps {
          dir("terraform") {
           input 'Apply Plan'
+           env.data = readFile(file: '${WORKSPACE}/terraform/inventory_temp')
+           writeFile(file: 'inventory', text: $data)
            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
               //sh "terraform plan -out=tfplan -input=false"
@@ -48,7 +50,7 @@ pipeline {
          dir("ansible") {
            ansiblePlaybook(
              credentialsId: 'ansible', 
-             inventory: '${WORKSPACE}/terraform/hosts/kubernetes-csr', 
+             inventory: '${WORKSPACE}/terraform/inventory', 
              playbook: 'main.yaml'
            )
           }
