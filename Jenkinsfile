@@ -42,6 +42,7 @@ pipeline {
           }
         }
       }
+    }
     stage('Ansible playbook'){
       steps {
          dir("ansible") {
@@ -54,9 +55,7 @@ pipeline {
               //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
               //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
-        }
-      }
-      
-    }
+       }
+     }   
   }
 }
