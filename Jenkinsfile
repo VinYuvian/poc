@@ -2,6 +2,7 @@ pipeline {
   agent any
   tools {
         terraform 'terraform'
+        ansible 'ansible'
     }
   environment {
     TERRAFORM_HOME = "terraform"
@@ -37,11 +38,27 @@ pipeline {
            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
               //sh "terraform plan -out=tfplan -input=false"
-              //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
-              sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+              sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+              //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
         }
       }
+    }
+    stage('Ansible playbook'){
+      steps {
+         dir("ansible") {
+           ansiblePlaybook(
+             credentialsId: 'ansible', 
+             inventory: '/hosts/inventory', 
+             playbook: 'main.yml'
+           )
+              //sh "terraform plan -out=tfplan -input=false"
+              //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+              //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+          }
+        }
+      }
+      
     }
   }
 }
