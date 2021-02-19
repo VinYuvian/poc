@@ -37,8 +37,8 @@ pipeline {
            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
               //sh "terraform plan -out=tfplan -input=false"
-              sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
-              //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+              //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+              sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
         }
       }
