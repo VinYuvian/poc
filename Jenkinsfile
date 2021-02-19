@@ -48,7 +48,7 @@ pipeline {
          dir("ansible") {
            ansiblePlaybook(
              credentialsId: 'ansible', 
-             inventory: '${WORKSPACE}/terraform/inventory', 
+             inventory: '${WORKSPACE}/terraform/hosts/kubernetes-csr', 
              playbook: 'main.yaml'
            )
               //sh "terraform plan -out=tfplan -input=false"
