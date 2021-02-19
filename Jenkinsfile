@@ -43,7 +43,6 @@ pipeline {
           }
         }
       }
-    }
     stage('Ansible playbook'){
       steps {
          dir("ansible") {
