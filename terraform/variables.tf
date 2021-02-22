@@ -37,7 +37,7 @@ variable "controller_instance_type"{
 }
 
 variable "worker_instance_type"{
-    default = "t2.small"
+    default = "t2.micro"
 }
 
 variable "ami"{
