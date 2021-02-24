@@ -26,7 +26,7 @@
     - name: install Pod network
       become: yes
       become_user: ubuntu
-      shell: kubectl create -f https://docs.projectcalico.org/v3.15/manifests/calico.yaml >> pod_network_setup.txt
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
