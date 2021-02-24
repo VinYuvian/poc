@@ -43,15 +43,15 @@ pipeline {
              }
       
             // echo "Waiting ${SLEEP_TIME_IN_SECONDS} seconds for deployment to complete prior starting smoke testing"
-             //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
-             sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+             sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+             //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
         }
       }
     }
     stage('Ansible playbook'){
       steps {
-         sleep 60 // seconds
+         sleep 30 // seconds
          dir("ansible") {
            ansiblePlaybook(
              credentialsId: 'ansible', 
