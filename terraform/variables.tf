@@ -41,7 +41,7 @@ variable "worker_instance_type"{
 }
 
 variable "ami"{
-    default = "ami-0a9d27a9f4f5c0efc"
+    default = "ami-042b34111b1289ccd"
 }
 
 variable "default_keypair_name"{
