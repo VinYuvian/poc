@@ -51,7 +51,7 @@ pipeline {
     }
     stage('Ansible playbook'){
       steps {
-         sleep 30 // seconds
+         sleep 60 // seconds
          dir("ansible") {
            ansiblePlaybook(
              credentialsId: 'ansible', 
