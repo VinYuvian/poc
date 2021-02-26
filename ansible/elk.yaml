@@ -1,0 +1,14 @@
+- hosts: masters
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+  - name: copy kube files to master
+    copy: src=. dest=/home/ubuntu/ directory_mode=yes
+
+
+  - name: Apply filebeat
+    shell: kubectl create -f filebeat-kubernetes.yaml
+
+  - name: Apply metric-beat
+    shell: kubectl create -f metricbeat-kubernetes.yaml
