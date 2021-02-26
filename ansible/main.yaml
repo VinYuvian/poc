@@ -7,3 +7,6 @@
 
 - name: worker tasks
   import_playbook: join.yaml
+
+- name: elk tasks
+  import_playbook: elk.yaml
