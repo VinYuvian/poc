@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options{
+    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2',daysToKeepStr: '1'))
+  }
   tools {
         terraform 'terraform'
     }
@@ -43,8 +46,8 @@ pipeline {
              }
       
             // echo "Waiting ${SLEEP_TIME_IN_SECONDS} seconds for deployment to complete prior starting smoke testing"
-             sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
-             //sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+             //sh 'terraform destroy --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
+             sh 'terraform apply --auto-approve -var="aws_access_key=$access_key" -var="aws_secret_key=$secret_key"'
           }
         }
       }
