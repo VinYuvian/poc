@@ -30,6 +30,10 @@ data:
     #        paths:
     #          - /var/log/containers/*${data.kubernetes.container.id}.log
 
+    #setup.dashboards.enabled: true
+    setup.dashboards.enabled: true
+    setup.kibana.host: "http://13.126.252.69:5601"
+
     processors:
       - add_cloud_metadata:
       - add_host_metadata:
