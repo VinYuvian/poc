@@ -6,16 +6,6 @@ variable "project"{
     default = "project"
 }
 
-variable "vpc_id"{
-    default = "vpc-0b9b5a3f39b1c09c5"
-}
-
-variable "aws_access_key"{
-      default = "aws_key"
-  }
-variable "aws_secret_key"{
-      default = "aws_key"
-  }
 variable "region"{
     default="ap-south-1"
 }
@@ -37,7 +27,7 @@ variable "controller_instance_type"{
 }
 
 variable "worker_instance_type"{
-    default = "t2.small"
+    default = "t2.micro"
 }
 
 variable "ami"{
@@ -46,4 +36,16 @@ variable "ami"{
 
 variable "default_keypair_name"{
     default = "kubernetes"
+}
+
+variable "master_pvt_ip"{
+    default = "192.168.3.34"
+}
+variable "worker_count"{
+    default = 3
+}
+
+
+variable "master_count"{
+    default = 1
 }
