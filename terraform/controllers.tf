@@ -6,7 +6,7 @@ resource "aws_instance" "controller" {
     iam_instance_profile = aws_iam_instance_profile.kubernetes.id
     subnet_id=tolist(data.aws_subnet_ids.public.ids)[count.index]
     #subnet_id = data.aws_subnet_ids.public[count.index]
-    private_ip = var.master_pvt_ip
+    #private_ip = var.master_pvt_ip
     associate_public_ip_address = true # Instances have public, dynamic IP
     source_dest_check = false # TODO Required??
 
