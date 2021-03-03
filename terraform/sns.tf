@@ -21,8 +21,11 @@ resource "aws_sns_topic" "alarm" {
   }
 }
 EOF
-
-  provisioner "local-exec" {
-    command = "aws sns subscribe --topic-arn ${self.arn} --region ${data.aws_region.current.name} --protocol email --notification-endpoint ${var.alarms_email}"
-  }
 }
+
+resource "aws_sns_topic_subscription" "alarm_target" {
+  topic_arn = aws_sns_topic.alarm.arn
+  protocol  = "sqs"
+  endpoint  = var.alarms_email
+}
+
