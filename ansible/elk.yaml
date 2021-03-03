@@ -2,13 +2,20 @@
   become: yes
   become_user: ubuntu
   gather_facts: false
+  vars:
+    kibana_host: "http://13.232.104.5:5601"
+    elastic_host: "13.232.104.5"
   tasks:
-  - name: copy kube files to master
-    copy: src=. dest=/home/ubuntu/ directory_mode=yes
+  - name: copy file-beat to master
+    template: src=filebeat-kubernetes.yaml.j2 dest=/home/ubuntu/filebeat-kubernetes.yaml
+
+  - name: copy metric-beat to master
+    template: src=metricbeat-kubernetes.yaml.j2 dest=/home/ubuntu/metricbeat-kubernetes.yaml
 
   - name: Apply filebeat
     shell: kubectl create -f filebeat-kubernetes.yaml >> file-beat.txt
     ignore_errors: yes
+
 
   - name: Apply metric-beat
     shell: kubectl create -f metricbeat-kubernetes.yaml >> metric-beat.txt
