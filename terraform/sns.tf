@@ -25,7 +25,7 @@ EOF
 
 resource "aws_sns_topic_subscription" "alarm_target" {
   topic_arn = aws_sns_topic.alarm.arn
-  protocol  = "sqs"
+  protocol  = "email"
   endpoint  = var.alarms_email
 }
 
