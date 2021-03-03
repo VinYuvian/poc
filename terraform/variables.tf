@@ -59,3 +59,7 @@ variable "worker_count"{
 variable "master_count"{
     default = 1
 }
+
+variable "alarms_email"{
+    default = "vinay@alethea.in"
+}
