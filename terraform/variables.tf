@@ -52,7 +52,7 @@ variable "master_pvt_ip"{
     default = "192.168.3.34"
 }
 variable "worker_count"{
-    default = 2
+    default = 1
 }
 
 
