@@ -23,9 +23,8 @@ resource "aws_sns_topic" "alarm" {
 EOF
 }
 
-resource "aws_sns_topic_subscription" "alarm_target" {
-  topic_arn = aws_sns_topic.alarm.arn
-  protocol  = "email"
-  endpoint  = var.alarms_email
+provisioner "local-exec" {
+    command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.alarms_email}"
+  }
 }
 
