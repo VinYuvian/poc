@@ -63,3 +63,26 @@ variable "master_count"{
 variable "alarms_email"{
     default = "vinay@alethea.in"
 }
+
+variable "sns_subscription_email_address_list" {
+   type = list(string)
+   default = ["vinay@alethea.in","vinay.nuthipelly@gmail.com"]
+ }
+ 
+ variable "sns_subscription_protocol" {
+   type = string
+   default = "email"
+   description = "SNS subscription protocal"
+ }
+ 
+ variable "sns_topic_name" {
+   type = string
+   description = "SNS topic name"
+   default = "test-poc"
+ }
+ 
+ variable "sns_topic_display_name" {
+   type = string
+   description = "SNS topic display name"
+   default = "test-poc"
+ }
