@@ -1,28 +1,20 @@
-data "aws_region" "current" {}
-
-resource "aws_sns_topic" "alarm" {
-  name = "alarms-topic"
-  delivery_policy = <<EOF
-{
-  "http": {
-    "defaultHealthyRetryPolicy": {
-      "minDelayTarget": 20,
-      "maxDelayTarget": 20,
-      "numRetries": 3,
-      "numMaxDelayRetries": 0,
-      "numNoDelayRetries": 0,
-      "numMinDelayRetries": 0,
-      "backoffFunction": "linear"
-    },
-    "disableSubscriptionOverrides": false,
-    "defaultThrottlePolicy": {
-      "maxReceivesPerSecond": 1
-    }
-  }
-}
-EOF
-
-  provisioner "local-exec" {
-    command = "aws sns subscribe --topic-arn ${self.arn} --region ${data.aws_region.current.name} --protocol email --notification-endpoint ${var.alarms_email}"
-  }
-}
+data "template_file" "aws_cf_sns_stack" {
+   template = file("templates/cf_aws_sns_email_stack.json.tpl")
+   vars = {
+     sns_topic_name        = var.sns_topic_name
+     //sns_topic_name        = var.sns_topic_name 
+     sns_display_name      = var.sns_topic_display_name
+     sns_subscription_list = join(",", formatlist("{\"Endpoint\": \"%s\",\"Protocol\": \"%s\"}",
+     var.sns_subscription_email_address_list,
+     var.sns_subscription_protocol))
+   }
+ }
+ 
+ resource "aws_cloudformation_stack" "tf_sns_topic" {
+   //count = var.worker_count
+   name = "snsStack"
+   template_body = data.template_file.aws_cf_sns_stack.rendered
+   tags = {
+     name = "snsStack"
+   }
+ }
