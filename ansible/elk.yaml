@@ -3,8 +3,8 @@
   become_user: ubuntu
   gather_facts: false
   vars:
-    kibana_host: "http://15.206.167.149:5601"
-    elastic_host: "15.206.167.149"
+    kibana_host: "http://13.234.110.73:5601"
+    elastic_host: "13.234.110.73"
   tasks:
   - name: copy file-beat to master
     template: src=filebeat-kubernetes.yaml.j2 dest=/home/ubuntu/filebeat-kubernetes.yaml
