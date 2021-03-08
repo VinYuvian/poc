@@ -32,6 +32,9 @@ resource "null_resource" "inventory_worker" {
         provisioner "local-exec"{
 			command="/bin/bash inventory.sh '[workers]' 'worker${count.index} ansible_host=${data.aws_instances.worker.public_ips[count.index]}'"
 	    }
+      depends_on = [
+            aws_cloudwatch_metric_alarm.cpu
+        ]
 }
 
 resource "null_resource" "inventory_master" {
