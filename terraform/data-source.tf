@@ -27,6 +27,7 @@ data "aws_instances" "master" {
 resource "null_resource" "inventory_worker" {
         triggers = {
               always_run = timestamp()
+              #order = aws_cloudwatch_metric_alarm.cpu[local.workers].id
         }
         count = var.worker_count
         provisioner "local-exec"{
@@ -35,6 +36,12 @@ resource "null_resource" "inventory_worker" {
       depends_on = [
             aws_cloudwatch_metric_alarm.cpu
         ]
+}
+
+resource "time_sleep" "wait_15_seconds" {
+  depends_on = [null_resource.inventory_worker]
+
+  create_duration = "15s"
 }
 
 resource "null_resource" "inventory_master" {
@@ -46,6 +53,6 @@ resource "null_resource" "inventory_master" {
 			command="/bin/bash inventory.sh '[masters]' 'master ansible_host=${data.aws_instances.master.public_ips[count.index]}'"
 	    }
         depends_on = [
-            null_resource.inventory_worker
+            time_sleep.wait_15_seconds
         ]
 }
