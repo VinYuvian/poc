@@ -36,7 +36,7 @@ pipeline {
     stage('Terraform Apply') {
       steps {
          dir("terraform") {
-          input 'Apply Plan'
+          //input 'Apply Plan'
            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'access_key', credentialsId: 'aws_key', secretKeyVariable: 'secret_key']]) {
               // some block
               //sh "terraform plan -out=tfplan -input=false"
