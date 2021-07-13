@@ -19,7 +19,7 @@ pipeline {
               sh 'terraform init --backend-config="access_key=$access_key" --backend-config="secret_key=$secret_key"'
           }
         }
-          // sh "${env.TERRAFORM_HOME}/terraform init -input=false"
+         
       }
     }
     stage('Terraform Plan') {
