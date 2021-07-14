@@ -3,7 +3,6 @@ pipeline {
   options{
     buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2',daysToKeepStr: '1'))
   }
-  //comment for webhoot testing
   tools {
         terraform 'terraform'
     }
